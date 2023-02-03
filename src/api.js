@@ -18,3 +18,12 @@ export const getPokemons = async (limit = 50, offset = 0) =>{
     }
 
 }
+export const getPokemonData = async (url) =>{
+    try{
+        const response = await fetch(url)
+        return await response.json()
+    } catch(error){
+        console.log('erro', error)
+    }
+
+}
