@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { NavBar } from './components/NavBar/NavBar'
 import './App.css'
 import { Searchbar } from './components/Searchbar'
-import { getPokemons, searchPokemon } from './api'
+import { getPokemonData, getPokemons, searchPokemon } from './api'
 import axios from 'axios'
 import Pokedex from './components/Pokedex'
 function App() {
@@ -11,8 +11,12 @@ function App() {
  const fetchPokemons = async()=>{
     try {
       setLoading(true)
-      const result = await getPokemons()
-      setPokemons(result)
+      const data = await getPokemons()
+      const promises = data.results.map(async(pokemon)=>{
+        return await getPokemonData(pokemon.url)
+      })
+      const results = await Promise.all(promises)
+      setPokemons(results)
       setLoading(false)
     } catch (error) {
       console.log('fetchpokemons', error)
@@ -20,7 +24,7 @@ function App() {
  }
 
   useEffect(() => {
-    console.log('carregou')
+    console.log('carregou fetch')
     fetchPokemons();
   }, []);
   
