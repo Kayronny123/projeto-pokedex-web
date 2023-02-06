@@ -4,7 +4,7 @@ import { searchPokemon } from '../api'
 export const Searchbar = () => {
 
     const [search, setSearch] = useState('dito')
-    const [pokemon, setPokemon]= useState()
+    
     const onChangeHandler = (e) => {
         setSearch(e.target.value)
     }
@@ -25,13 +25,6 @@ export const Searchbar = () => {
                 <div className='searchbar-btn'>
                     <button onClick={onButtonClickHandler}>Buscar</button>
                 </div>
-                {pokemon ? (
-                    <div>
-                        <div>Nome: {pokemon.name}</div>
-                        <div>Peso: {pokemon.weight}</div>
-                        <img src={pokemon.sprites.front_default} alt={pokemon.name}/>
-                    </div>
-                ) : null }
             </div>
 
         </div>
