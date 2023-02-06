@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { NavBar } from './components/NavBar/NavBar'
 import './App.css'
-import { Searchbar } from './components/Searchbar'
+import Searchbar  from './components/Searchbar'
 import { getPokemonData, getPokemons, searchPokemon } from './api'
-import axios from 'axios'
 import Pokedex from './components/Pokedex'
 import { FavoritePovider } from './context/favoritesContext'
 
@@ -14,11 +13,13 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [pokemons, setPokemons] = useState([])
   const [favorites, setFavorites] = useState([])
+  const [notFound, setNotFound] = useState(false)
   const itensPerPage = 25
 
  const fetchPokemons = async()=>{
     try {
       setLoading(true)
+      setNotFound(false)
       const data = await getPokemons(itensPerPage, itensPerPage * page)
 
       const promises = data.results.map(async(pokemon)=>{
@@ -59,6 +60,23 @@ function App() {
     setFavorites(updateFavorites)
   }
 
+  const onSearchHandler = async (pokemon)=>{
+    if(!pokemon){
+      return fetchPokemons()
+    }
+    setLoading(true)
+    setNotFound(false)
+    const result = await searchPokemon(pokemon)
+    if(!result){
+      setNotFound(true)
+    } else {
+      setPokemons({result})
+      setPage(0)
+      setTotalPages(1)
+    }
+    setLoading(false)
+  }
+
   return (
 <FavoritePovider value={{favoritePokemons: favorites,
 updateFavoritesPokemons: updateFavoritesPokemons
@@ -66,8 +84,11 @@ updateFavoritesPokemons: updateFavoritesPokemons
 
     <div>
   <NavBar/>
-  <Searchbar />
-  <Pokedex  pokemons={pokemons} loading={loading} page={page} totalPages={totalPages} setPage={setPage} />
+  <Searchbar onSearchHandler={onSearchHandler}  />
+  {notFound ? (
+    <div className='not-found-text'> Não encontrado </div>
+  ) : 
+  <Pokedex  pokemons={pokemons} loading={loading} page={page} totalPages={totalPages} setPage={setPage} />}
   
     </div>
     </FavoritePovider>
