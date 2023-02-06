@@ -1,6 +1,7 @@
 import React from 'react'
 import Pokemon from './Pokemon'
 import Pagination from './Pagination'
+
 function Pokedex(props) {
     const { pokemons, loading, page, totalPages, setPage } = props
     const onLeftClickHandler = ()=>{
@@ -30,7 +31,7 @@ function Pokedex(props) {
             <div>Carregando...</div>
             ) : (
                 <div className='pokedex-grid'>
-                    {pokemons && pokemons.map((pokemon, index)=>{
+                    {pokemons.map((pokemon, index)=>{
                         return(
                            <Pokemon key={index} pokemon={pokemon}/>
                         )
@@ -42,4 +43,4 @@ function Pokedex(props) {
     )
 }
 
-export default Pokedex
+export default Pokedex;
