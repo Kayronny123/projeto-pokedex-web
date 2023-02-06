@@ -24,14 +24,14 @@ nav {
     padding:  0 20px;
     align-items: center;
 }
-.searchbar{
+.searchbar {
     background-color: white;
     margin-right: 20px;
 
 }
-.searchbar input{
+.searchbar input {
     padding: 0px;
-    box-shadow: 0px 2px 2px (0,0,0,0.25);
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.25);
     border-radius: 3px;
     border: none;
 }
@@ -59,16 +59,19 @@ nav {
     
 }
 
-.card-pokemon{
+.pokemon-card{
     display: flex;
-    box-shadow: 4px 4px 4px (0,0,0,0.25);
-    border-radius: 3px;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.25);
+    border-radius: 5px;
+    border: 1px solid black;
 
 }
 .pokemon-image{
     width: 70px;
     height: 70px;
     margin-right: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 .pokemon-image-container{
      padding: 0px 5px;
@@ -79,6 +82,8 @@ nav {
     justify-content: space-between;
     padding: 10px 10px 10px 0px;
     flex: 1;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 .card-top{
     display: flex;
@@ -109,6 +114,21 @@ nav {
     flex-direction: row;
     align-items: center;
      
+}
+
+.not-found-text{
+    text-align: center;
+    font-size: 1.25rem;
+    padding: 20px;
+}
+
+.pokemon-heart-btn{
+    border: none;
+    background-color: white;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25);
+    padding: 4px;
+    cursor: pointer;
+    align-items: center;
 }
 
 .App{
