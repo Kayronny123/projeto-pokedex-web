@@ -1,11 +1,18 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import heartfavred from '../assets/heart-fav.png'
+import heartfavblack from '../assets/heart-fav-black.png'
+import FavoriteContext from '../context/favoritesContext'
 
 function Pokemon(props) {
 
+    const {favoritePokemons,updateFavoritesPokemons }=useContext(FavoriteContext)
+
+
     const {pokemon}=props
     const onHeartClick= ()=>{
-        console.log('favorito')
+        updateFavoritesPokemons(pokemon.name)
     }
+    const iconHeart = favoritePokemons.includes(pokemon.name) ? heartfavred : heartfavblack;
 
   return (
     <div className='pokemon-card'>
@@ -27,8 +34,8 @@ function Pokemon(props) {
             </div>
 
             </div>
-            <button className='pokemon-heart-btn' onClick={onHeartClick}>
-                Favorite
+            <button className='pokemon-heart-btn' onClick={onHeartClick} style={{width: '30px', height: '30px',}}>
+                   <img alt='favotiro' src={iconHeart} style={{width: '25px', height: '25px',}} />
             </button>
         </div>
     </div>
